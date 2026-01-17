@@ -50,7 +50,7 @@ if audio:
         audio_filename = fp.name
 
     try:
-        # 聽 (已更新為最新模型 whisper-large-v3)
+        # 1. 耳朵：使用最新 whisper-large-v3
         with open(audio_filename, "rb") as file:
             transcription = client.audio.transcriptions.create(
                 file=(audio_filename, file.read()),
@@ -62,9 +62,9 @@ if audio:
         with st.chat_message("user"):
             st.write(user_text)
 
-        # 想
+        # 2. 大腦：使用最新 llama-3.1-8b-instant
         completion = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.1-8b-instant",
             messages=st.session_state.messages,
             temperature=0.7,
             max_tokens=200,
@@ -74,7 +74,7 @@ if audio:
         with st.chat_message("assistant"):
             st.write(ai_response)
 
-        # 說
+        # 3. 嘴巴：合成語音
         audio_file = asyncio.run(text_to_speech(ai_response))
         st.audio(audio_file, format="audio/mp3", autoplay=True)
 
