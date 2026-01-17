@@ -79,4 +79,4 @@ if audio:
         st.audio(audio_file, format="audio/mp3", autoplay=True)
 
     except Exception as e:
-        st.error(f"Error: {str(e)}"
+        st.error(f"Error: {str(e)}")
