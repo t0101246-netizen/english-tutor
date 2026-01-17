@@ -50,11 +50,11 @@ if audio:
         audio_filename = fp.name
 
     try:
-        # 聽
+        # 聽 (已更新為最新模型 whisper-large-v3)
         with open(audio_filename, "rb") as file:
             transcription = client.audio.transcriptions.create(
                 file=(audio_filename, file.read()),
-                model="distil-whisper-large-v3-en",
+                model="whisper-large-v3",
                 response_format="json"
             )
         user_text = transcription.text
